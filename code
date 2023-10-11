@@ -1,0 +1,151 @@
+#include<iostream>
+using namespace std;
+
+//function declarations
+void MonsterGen();
+
+int main() {
+
+	int room = 1;
+	char direction;
+	bool key1 = false;
+
+	do { //GAME LOOP
+		switch (room) {
+		case 1:
+			cout << "you're in an abandoned broken down house. You have lost your memory and have no clue about how you ended up here. You seem to be in the living room right now. You can go (e)ast" << endl;
+			cin >> direction;
+			if (direction == 'e')
+				room = 2;
+			break;
+
+		case 2:
+			cout << "you're in a dim lighted room with nothing in it. You can go (s)outh or (w)est." << endl;
+			cin >> direction;
+			if (direction == 's')
+				room = 3;
+			else if (direction == 'w')
+				room = 1;
+			break;
+
+		case 3:
+			cout << "you're in a room with a creepy doll sitting in the corner. You can go (s)outh or (n)orth." << endl;
+			cin >> direction;
+			if (direction == 's')
+				room = 4;
+			else if (direction == 'n')
+				room = 2;
+			break;
+
+		case 4:
+			cout << "you're in a room that looks exactly the same as the last room, but there are two dolls now. You can go (e)ast or (n)orth." << endl;
+			cin >> direction;
+			if (direction == 'e')
+				room = 5;
+			else if (direction == 'n')
+				room = 3;
+			break;
+
+		case 5:
+			cout << "you're in a room filled with dolls, you see an old creeky stair case leading downstairs. You can go (w)est or (S)tairs." << endl;
+			cin >> direction;
+			if (direction == 'w')
+				room = 4;
+			if (direction == 'S')
+				room = 6;
+			break;
+
+		case 6:
+			cout << "you look around, you see a chair, desk, and an old broken down ceeling fan. You can go (S)tairs or (s)outh." << endl;
+			cin >> direction;
+			if (direction == 'S')
+				room = 5;
+			if (direction == 's')
+				room = 7;
+			break;
+
+		case 7:
+			cout << "this room has nothing in it, but you get an eerie feeling. You can go (n)orth or (e)ast." << endl;
+			cin >> direction;
+			if (direction == 'n')
+				room = 6;
+			if (direction == 'e')
+				room = 8;
+			break;
+
+		case 8:
+			cout << "you're in a dark room, you can just barely see a light at the end of the room. You can go (w)est or (e)ast." << endl;
+			cin >> direction;
+			if (direction == 'w')
+				room = 7;
+			if (direction == 'e')
+				room = 9;
+			break;
+
+		case 9:
+			cout << "you're in a room with 2 pathways. You can go (w)est, (n)orth, or (L)ocked door." << endl;
+			cin >> direction;
+			if (direction == 'w')
+				room = 8;
+			if (direction == 'n')
+				room = 10;
+			if (direction == 'L')
+				if (key1 == true) {
+					room = 11;
+					cout << "You unlocked the door" << endl;
+					key1 = false;
+				}
+				else
+					cout << "The door is locked." << endl;
+			break;
+
+		case 10:
+			cout << "you're in an empty room, but something is in the middle of the floor. You can go (s)outh." << endl;
+			if (key1 == false)
+				cout << "you walk up and see a (k)ey on the ground." << endl;
+			cin >> direction;
+			if (direction == 's')
+				room = 9;
+			if (direction == 'k')
+				key1 = true;
+			cout << "you picked up a mysterious key..." << endl;
+			break;
+
+		case 11:
+			MonsterGen();//function call
+			cout << "you're in a room made of stone with a metal door at the end. You can go (w)est" << endl;
+			cin >> direction;
+			if (direction == 'w')
+				room = 9;
+			break;
+		default:
+			cout << "you should never see this!" << endl;
+		}
+	} while (direction != 'q');
+}
+
+//function definitions
+void MonsterGen() {
+	int num = rand() % 100; // creates a number from 0-99
+	if (num < 15) {//15% chance
+		cout << "a skeleton spawned!" << endl;
+	}
+	else if (num < 20) {//5% chance
+		cout << "a spider crawls towards you." << endl;
+		cout << "it jumps at you." << endl;
+	}
+
+	else if (num < 50) {//30%
+		cout << "a zombie stumbles forward." << endl;
+		cout << "it chomps towards you." << endl;
+	}
+	else if (num < 75) {//25% chance
+		cout << "a golem rumbles towards you." << endl;
+		cout << "it slams the floor infront of you." << endl;
+	}
+	else if (num < 100) {//25% chance
+		cout << "a ghost floats through your body." << endl;
+		cout << "it gives you the chills." << endl;
+	}
+
+}
